@@ -18,6 +18,8 @@ import org.springframework.stereotype.Repository;
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
 import com.clean.code.dto.State;
+import com.clean.code.request.BetRequest;
+import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
@@ -78,6 +80,23 @@ public class RouletteDao implements IRouletteDao {
 
 		} catch (Exception e) {
 			throw new GerException("Ocurrió un error general aperturando la ruleta..", false, e);
+		}
+
+	}
+
+	@Override
+	public BetResponse betRoulettes(BetRequest betRequest) throws GerException {
+		try {
+			String sql = "insert into ger.tr_roulette (numberBet, colorBet, amountBet, amountPaid, usuarioId, rouletteId) values (?,?,?,?,?,?)";
+			jdbcTemplate.update(sql, new Object[] { betRequest.getNumber(), betRequest.getColor(),
+					betRequest.getAmount(), 0.00, betRequest.getUsuarioId(), betRequest.getRouletteId() });
+			BetResponse response = new BetResponse();
+			response.setMessage("Apuesta realizada exitosamente");
+
+			return response;
+
+		} catch (Exception e) {
+			throw new GerException("Ocurrió un error general realizando la apuesta", false, e);
 		}
 
 	}

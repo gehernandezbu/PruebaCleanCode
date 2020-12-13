@@ -13,13 +13,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.code.core.BaseController;
 import com.clean.code.dto.Roulette;
+import com.clean.code.request.BetRequest;
 import com.clean.code.request.OpenRouletteRequest;
+import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
@@ -58,6 +61,15 @@ public class RouletteController extends BaseController {
 		Roulette roulette = new Roulette();
 		roulette.setRouletteId(request.getStateId());
 		OpenRouletteResponse response = rouletteService.openRoulettes(roulette);
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+
+	@RequestMapping(value = "/v1/bet/roulettes", method = RequestMethod.POST)
+	public ResponseEntity<?> betRoulette(@RequestHeader("usuario-id") int id, @RequestBody BetRequest request)
+			throws Exception {
+		request.setUsuarioId(id);
+		BetResponse response = rouletteService.betRoulettes(request);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

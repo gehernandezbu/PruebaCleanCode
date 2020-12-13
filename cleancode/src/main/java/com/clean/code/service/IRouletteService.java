@@ -10,6 +10,8 @@ package com.clean.code.service;
 
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
+import com.clean.code.request.BetRequest;
+import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
@@ -27,5 +29,7 @@ public interface IRouletteService {
 	public RouletteResponse createRoulettes() throws GerException;
 
 	public OpenRouletteResponse openRoulettes(Roulette roulette) throws GerException;
+
+	public BetResponse betRoulettes(BetRequest betRequest) throws GerException;
 
 }

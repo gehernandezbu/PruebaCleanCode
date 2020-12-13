@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
 import com.clean.code.persistence.IRouletteDao;
+import com.clean.code.request.BetRequest;
+import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
@@ -43,6 +45,33 @@ public class RouletteService implements IRouletteService {
 	@Override
 	public OpenRouletteResponse openRoulettes(Roulette roulette) throws GerException {
 		return rouletteDao.openRoulettes(roulette);
+	}
+
+	@Override
+	public BetResponse betRoulettes(BetRequest betRequest) throws GerException {
+		validateColor(betRequest.getColor());
+		validateNumber(betRequest.getNumber());
+		validateAmount(betRequest.getAmount());
+		return rouletteDao.betRoulettes(betRequest);
+	}
+
+	private void validateColor(String color) throws GerException {
+		if (!(color.equals("NEGRO") || color.equals("ROJO"))) {
+			throw new GerException("Los colores válidos para la apuesta son 'NEGRO' ó 'ROJO'", true, null);
+		}
+
+	}
+
+	private void validateNumber(int number) throws GerException {
+		if (number < 0 || number > 36) {
+			throw new GerException("El rango de números válidos para la apuesta es de '0' a '36'", true, null);
+		}
+	}
+
+	private void validateAmount(Double amount) throws GerException {
+		if (amount <= 1 || amount > 10000) {
+			throw new GerException("Se debe ingresar un monto válido para la apuesta entre '1,00' y '10.000,00' dólares ", true, null);
+		}
 	}
 
 }
