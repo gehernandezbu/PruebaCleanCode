@@ -14,6 +14,7 @@ import com.clean.code.request.BetRequest;
 import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
+import com.clean.code.response.RoulettesResponse;
 import com.clean.code.response.StateResponse;
 
 /**
@@ -31,5 +32,8 @@ public interface IRouletteService {
 	public OpenRouletteResponse openRoulettes(Roulette roulette) throws GerException;
 
 	public BetResponse betRoulettes(BetRequest betRequest) throws GerException;
+	
+	public RoulettesResponse findAllRoulettes() throws GerException;
+	
 
 }

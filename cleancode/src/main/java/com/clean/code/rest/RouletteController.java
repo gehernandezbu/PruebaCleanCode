@@ -25,6 +25,7 @@ import com.clean.code.request.OpenRouletteRequest;
 import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
+import com.clean.code.response.RoulettesResponse;
 import com.clean.code.response.StateResponse;
 import com.clean.code.service.IRouletteService;
 
@@ -70,6 +71,13 @@ public class RouletteController extends BaseController {
 			throws Exception {
 		request.setUsuarioId(id);
 		BetResponse response = rouletteService.betRoulettes(request);
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+	
+	@RequestMapping(value = "/v1/find/roulettes", method = RequestMethod.GET)
+	public ResponseEntity<?> findAllRoulettes() throws Exception {
+		RoulettesResponse response = rouletteService.findAllRoulettes();
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

@@ -15,7 +15,7 @@ package com.clean.code.dto;
  * @version 1.0 Creation and documentation of the Class.
  */
 public class Roulette {
-	private Long rouletteId;
+	private int rouletteId;
 	private int minNumber;
 	private int maxNumber;
 	private State state;
@@ -23,7 +23,7 @@ public class Roulette {
 	/**
 	 * @return the attribute rouletteId
 	 */
-	public Long getRouletteId() {
+	public int getRouletteId() {
 		return rouletteId;
 	}
 
@@ -32,7 +32,7 @@ public class Roulette {
 	 * 
 	 * @param rouletteId value to be updated
 	 */
-	public void setRouletteId(Long rouletteId) {
+	public void setRouletteId(int rouletteId) {
 		this.rouletteId = rouletteId;
 	}
 

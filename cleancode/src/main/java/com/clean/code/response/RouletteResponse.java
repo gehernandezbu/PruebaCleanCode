@@ -17,12 +17,12 @@ import com.clean.code.core.BaseResponse;
  * @version 1.0 Creation and documentation of the Class.
  */
 public class RouletteResponse extends BaseResponse {
-	private Long rouletteId;
+	private int rouletteId;
 
 	/**
 	 * @return the attribute rouletteId
 	 */
-	public Long getRouletteId() {
+	public int getRouletteId() {
 		return rouletteId;
 	}
 
@@ -30,7 +30,7 @@ public class RouletteResponse extends BaseResponse {
 	 * Update the attribute value rouletteId
 	 * @param rouletteId value to be updated
 	 */
-	public void setRouletteId(Long rouletteId) {
+	public void setRouletteId(int rouletteId) {
 		this.rouletteId = rouletteId;
 	}
 

@@ -15,14 +15,14 @@ package com.clean.code.dto;
  * @version 1.0 Creation and documentation of the Class.
  */
 public class State {
-	private Long stateId;
+	private int stateId;
 	private String code;
 	private String description;
 
 	/**
 	 * @return the attribute stateId
 	 */
-	public Long getStateId() {
+	public int getStateId() {
 		return stateId;
 	}
 
@@ -31,7 +31,7 @@ public class State {
 	 * 
 	 * @param stateId value to be updated
 	 */
-	public void setStateId(Long stateId) {
+	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
 

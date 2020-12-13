@@ -15,12 +15,12 @@ package com.clean.code.request;
  * @version 1.0 Creation and documentation of the Class.
  */
 public class OpenRouletteRequest {
-	private Long stateId;
+	private int stateId;
 
 	/**
 	 * @return the attribute stateId
 	 */
-	public Long getStateId() {
+	public int getStateId() {
 		return stateId;
 	}
 
@@ -28,7 +28,7 @@ public class OpenRouletteRequest {
 	 * Update the attribute value stateId
 	 * @param stateId value to be updated
 	 */
-	public void setStateId(Long stateId) {
+	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
 

@@ -8,7 +8,9 @@
  */
 package com.clean.code.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,6 +24,7 @@ import com.clean.code.request.BetRequest;
 import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
+import com.clean.code.response.RoulettesResponse;
 import com.clean.code.response.StateResponse;
 
 /**
@@ -99,6 +102,25 @@ public class RouletteDao implements IRouletteDao {
 			throw new GerException("Ocurrió un error general realizando la apuesta", false, e);
 		}
 
+	}
+
+	@Override
+	public RoulettesResponse findAllRoulettes() throws GerException {
+		String sql = "select * from ger.ma_roulette;";
+		List<Roulette> listRoulette = new ArrayList<>();
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		rows.forEach(row->{
+			Roulette roulette = new Roulette();
+			roulette.setState(new State());
+			roulette.setMaxNumber((int) row.get("maxNumber"));
+			roulette.setMinNumber((int) row.get("minNumber"));
+			roulette.setRouletteId((int) row.get("rouletteId"));
+			roulette.getState().setStateId((int) row.get("stateId"));
+			listRoulette.add(roulette);
+		});
+		RoulettesResponse response = new RoulettesResponse();
+		response.setListRoulette(listRoulette);
+		return response;
 	}
 
 }
