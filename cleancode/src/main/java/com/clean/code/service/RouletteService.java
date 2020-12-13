@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clean.code.persistence.IRouletteDao;
+import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 
 /**
@@ -24,12 +25,17 @@ import com.clean.code.response.StateResponse;
 public class RouletteService implements IRouletteService {
 
 	@Autowired
-	IRouletteDao rouletteService;
+	IRouletteDao rouletteDao;
 
 	@Override
 	public StateResponse findStates() {
 
-		return rouletteService.findStates();
+		return rouletteDao.findStates();
+	}
+
+	@Override
+	public RouletteResponse createRoulettes() {
+		return rouletteDao.createRoulettes();
 	}
 
 }

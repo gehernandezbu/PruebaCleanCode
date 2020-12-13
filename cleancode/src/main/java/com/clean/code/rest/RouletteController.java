@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.code.core.BaseController;
+import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 import com.clean.code.service.IRouletteService;
 
@@ -29,7 +30,7 @@ import com.clean.code.service.IRouletteService;
  */
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/roulette")
+@RequestMapping("/api")
 public class RouletteController extends BaseController {
 	@Autowired
 	IRouletteService rouletteService;
@@ -39,7 +40,13 @@ public class RouletteController extends BaseController {
 		StateResponse stateResponse = rouletteService.findStates();
 
 		return ResponseEntity.status(HttpStatus.OK).body(stateResponse);
+	}
 
+	@RequestMapping(value = "/v1/roulettes", method = RequestMethod.POST)
+	public ResponseEntity<?> createRoulettes() throws Exception {
+		RouletteResponse rouletteResponse = rouletteService.createRoulettes();
+
+		return ResponseEntity.status(HttpStatus.OK).body(rouletteResponse);
 	}
 
 }

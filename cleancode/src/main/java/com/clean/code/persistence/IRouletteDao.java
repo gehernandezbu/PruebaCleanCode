@@ -8,6 +8,7 @@
  */
 package com.clean.code.persistence;
 
+import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 
 /**
@@ -19,5 +20,7 @@ import com.clean.code.response.StateResponse;
 public interface IRouletteDao {
 
 	public StateResponse findStates();
+
+	public RouletteResponse createRoulettes();
 
 }

@@ -15,7 +15,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.clean.code.dto.Roulette;
 import com.clean.code.dto.State;
+import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 
 /**
@@ -36,6 +38,18 @@ public class RouletteDao implements IRouletteDao {
 		StateResponse response = new StateResponse();
 		response.setListStates(listState);
 		return response;
+	}
+
+	@Override
+	public RouletteResponse createRoulettes() {
+
+		String sql = "insert into ger.ma_roulette (minNumber, maxNumber, stateId) values (?,?,?)";
+		jdbcTemplate.update(sql, new Object[] { 0, 36, 2 });
+		String sql2 = "select rouletteId from ger.ma_roulette order by 1 desc limit 1";
+		List<Roulette> listRoulette = jdbcTemplate.query(sql2, new BeanPropertyRowMapper<Roulette>(Roulette.class));
+		RouletteResponse rouletteResponse = new RouletteResponse();
+		rouletteResponse.setRouletteId(listRoulette.get(0).getRouletteId());
+		return rouletteResponse;
 	}
 
 }
