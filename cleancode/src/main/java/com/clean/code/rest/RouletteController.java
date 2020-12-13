@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.code.core.BaseController;
+import com.clean.code.dto.Roulette;
+import com.clean.code.request.OpenRouletteRequest;
+import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 import com.clean.code.service.IRouletteService;
@@ -47,6 +51,15 @@ public class RouletteController extends BaseController {
 		RouletteResponse rouletteResponse = rouletteService.createRoulettes();
 
 		return ResponseEntity.status(HttpStatus.OK).body(rouletteResponse);
+	}
+
+	@RequestMapping(value = "/v1/open/roulettes", method = RequestMethod.POST)
+	public ResponseEntity<?> openRoulettes(@RequestBody OpenRouletteRequest request) throws Exception {
+		Roulette roulette = new Roulette();
+		roulette.setRouletteId(request.getStateId());
+		OpenRouletteResponse response = rouletteService.openRoulettes(roulette);
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 }

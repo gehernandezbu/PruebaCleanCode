@@ -11,7 +11,10 @@ package com.clean.code.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.clean.code.core.GerException;
+import com.clean.code.dto.Roulette;
 import com.clean.code.persistence.IRouletteDao;
+import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 
@@ -28,14 +31,18 @@ public class RouletteService implements IRouletteService {
 	IRouletteDao rouletteDao;
 
 	@Override
-	public StateResponse findStates() {
-
+	public StateResponse findStates() throws GerException {
 		return rouletteDao.findStates();
 	}
 
 	@Override
-	public RouletteResponse createRoulettes() {
+	public RouletteResponse createRoulettes() throws GerException {
 		return rouletteDao.createRoulettes();
+	}
+
+	@Override
+	public OpenRouletteResponse openRoulettes(Roulette roulette) throws GerException {
+		return rouletteDao.openRoulettes(roulette);
 	}
 
 }

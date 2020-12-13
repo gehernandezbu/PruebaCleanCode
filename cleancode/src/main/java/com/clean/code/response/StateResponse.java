@@ -11,6 +11,7 @@ package com.clean.code.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.clean.code.core.BaseResponse;
 import com.clean.code.dto.State;
 
 /**
@@ -19,7 +20,7 @@ import com.clean.code.dto.State;
  * @author Gerardo Hernández.
  * @version 1.0 Creation and documentation of the Class.
  */
-public class StateResponse {
+public class StateResponse extends BaseResponse {
 	List<State> listStates = new ArrayList<>();
 
 	/**

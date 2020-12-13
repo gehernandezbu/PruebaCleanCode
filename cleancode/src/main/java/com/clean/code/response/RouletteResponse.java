@@ -8,13 +8,15 @@
  */
 package com.clean.code.response;
 
+import com.clean.code.core.BaseResponse;
+
 /**
  * Class RouletteResponse
  * 
  * @author Gerardo Hernández.
  * @version 1.0 Creation and documentation of the Class.
  */
-public class RouletteResponse {
+public class RouletteResponse extends BaseResponse {
 	private Long rouletteId;
 
 	/**

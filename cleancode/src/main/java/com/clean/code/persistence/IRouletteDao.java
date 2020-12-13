@@ -8,6 +8,9 @@
  */
 package com.clean.code.persistence;
 
+import com.clean.code.core.GerException;
+import com.clean.code.dto.Roulette;
+import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.StateResponse;
 
@@ -19,8 +22,10 @@ import com.clean.code.response.StateResponse;
  */
 public interface IRouletteDao {
 
-	public StateResponse findStates();
+	public StateResponse findStates() throws GerException;
 
-	public RouletteResponse createRoulettes();
+	public RouletteResponse createRoulettes() throws GerException;
+
+	public OpenRouletteResponse openRoulettes(Roulette roulette) throws GerException;
 
 }
