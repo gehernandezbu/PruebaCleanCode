@@ -73,8 +73,10 @@ public class RouletteService implements IRouletteService {
 		roulette.setRouletteId(request.getRouletteId());
 		List<RouletteTx> list = rouletteDao.findAllTxRoulettes(roulette);
 		int winningNumber = getWinningNumber();
-
-		return null;
+		CloseRouletteResponse response = new CloseRouletteResponse();
+		response.setWinningNumber(winningNumber);
+		response.setListRouletteTx(list);
+		return response;
 	}
 
 	private void validateColor(String color) throws GerException {
