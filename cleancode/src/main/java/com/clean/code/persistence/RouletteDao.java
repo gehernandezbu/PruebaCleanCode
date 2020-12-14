@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
+import com.clean.code.dto.RouletteTx;
 import com.clean.code.dto.State;
 import com.clean.code.request.BetRequest;
 import com.clean.code.response.BetResponse;
@@ -108,8 +109,8 @@ public class RouletteDao implements IRouletteDao {
 	public RoulettesResponse findAllRoulettes() throws GerException {
 		String sql = "select * from ger.ma_roulette;";
 		List<Roulette> listRoulette = new ArrayList<>();
-		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
-		rows.forEach(row->{
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		rows.forEach(row -> {
 			Roulette roulette = new Roulette();
 			roulette.setState(new State());
 			roulette.setMaxNumber((int) row.get("maxNumber"));
@@ -121,6 +122,20 @@ public class RouletteDao implements IRouletteDao {
 		RoulettesResponse response = new RoulettesResponse();
 		response.setListRoulette(listRoulette);
 		return response;
+	}
+
+	@Override
+	public List<RouletteTx> findAllTxRoulettes(Roulette roulette) throws GerException {
+		try {
+
+			String sql = "select * from ger.tr_roulette where rouletteId = " + roulette.getRouletteId() + ";";
+			List<RouletteTx> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<RouletteTx>(RouletteTx.class));
+
+			return list;
+
+		} catch (Exception e) {
+			throw new GerException("Ocurrió un error general consultando las apuestas para la ruleta.", false, e);
+		}
 	}
 
 }

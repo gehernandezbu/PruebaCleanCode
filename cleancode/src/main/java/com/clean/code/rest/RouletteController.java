@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.clean.code.core.BaseController;
 import com.clean.code.dto.Roulette;
 import com.clean.code.request.BetRequest;
+import com.clean.code.request.CloseRouletteRequest;
 import com.clean.code.request.OpenRouletteRequest;
 import com.clean.code.response.BetResponse;
+import com.clean.code.response.CloseRouletteResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.RoulettesResponse;
@@ -74,10 +76,17 @@ public class RouletteController extends BaseController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
-	
+
 	@RequestMapping(value = "/v1/find/roulettes", method = RequestMethod.GET)
 	public ResponseEntity<?> findAllRoulettes() throws Exception {
 		RoulettesResponse response = rouletteService.findAllRoulettes();
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+
+	@RequestMapping(value = "/v1/close/roulette", method = RequestMethod.POST)
+	public ResponseEntity<?> closeRoulettes(@RequestBody CloseRouletteRequest request) throws Exception {
+		CloseRouletteResponse response = rouletteService.closeRoulettes(request);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

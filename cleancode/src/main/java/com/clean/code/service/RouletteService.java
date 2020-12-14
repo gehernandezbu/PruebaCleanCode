@@ -8,14 +8,19 @@
  */
 package com.clean.code.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
+import com.clean.code.dto.RouletteTx;
 import com.clean.code.persistence.IRouletteDao;
 import com.clean.code.request.BetRequest;
+import com.clean.code.request.CloseRouletteRequest;
 import com.clean.code.response.BetResponse;
+import com.clean.code.response.CloseRouletteResponse;
 import com.clean.code.response.OpenRouletteResponse;
 import com.clean.code.response.RouletteResponse;
 import com.clean.code.response.RoulettesResponse;
@@ -61,6 +66,17 @@ public class RouletteService implements IRouletteService {
 		return rouletteDao.findAllRoulettes();
 	}
 
+	@Override
+	public CloseRouletteResponse closeRoulettes(CloseRouletteRequest request) throws GerException {
+
+		Roulette roulette = new Roulette();
+		roulette.setRouletteId(request.getRouletteId());
+		List<RouletteTx> list = rouletteDao.findAllTxRoulettes(roulette);
+		int winningNumber = getWinningNumber();
+
+		return null;
+	}
+
 	private void validateColor(String color) throws GerException {
 		if (!(color.equals("NEGRO") || color.equals("ROJO"))) {
 			throw new GerException("Los colores válidos para la apuesta son 'NEGRO' ó 'ROJO'", true, null);
@@ -80,4 +96,10 @@ public class RouletteService implements IRouletteService {
 					"Se debe ingresar un monto válido para la apuesta entre '1,00' y '10.000,00' dólares ", true, null);
 		}
 	}
+
+	private int getWinningNumber() throws GerException {
+		int n = (int) (Math.random() * (37 - 0)) + 0;
+		return n;
+	}
+
 }

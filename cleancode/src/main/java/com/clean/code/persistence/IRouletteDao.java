@@ -8,8 +8,11 @@
  */
 package com.clean.code.persistence;
 
+import java.util.List;
+
 import com.clean.code.core.GerException;
 import com.clean.code.dto.Roulette;
+import com.clean.code.dto.RouletteTx;
 import com.clean.code.request.BetRequest;
 import com.clean.code.response.BetResponse;
 import com.clean.code.response.OpenRouletteResponse;
@@ -34,5 +37,7 @@ public interface IRouletteDao {
 	public BetResponse betRoulettes(BetRequest betRequest) throws GerException;
 
 	public RoulettesResponse findAllRoulettes() throws GerException;
+	
+	public List<RouletteTx> findAllTxRoulettes(Roulette roulette) throws GerException;
 
 }
